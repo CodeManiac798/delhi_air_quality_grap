@@ -1,0 +1,9 @@
+station_id,station_name,display_name,operating_agency,geographic_role,selected,selection_reason,latitude,longitude
+narela,Narela,Narela,DPCC,northern edge,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,
+bawana,Bawana,Bawana,DPCC,outer north-west,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,
+anand_vihar,Anand Vihar,Anand Vihar,DPCC,east,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,
+punjabi_bagh,Punjabi Bagh,Punjabi Bagh,DPCC,west,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,
+r_k_puram,R K Puram,R K Puram,DPCC,south,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,
+okhla_phase_2,Okhla Phase-2,Okhla Phase-2,DPCC,south-east,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,
+najafgarh,Najafgarh,Najafgarh,DPCC,south-west edge,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,
+jawaharlal_nehru_stadium,Jawaharlal Nehru Stadium,Jawaharlal Nehru Stadium,DPCC,central,True,geographic coverage; 2022+2023 availability; PM2.5 & weather availability; missingness quality filter,,

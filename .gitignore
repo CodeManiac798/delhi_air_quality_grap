@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Office temp/lock files
+~$*.xlsx
+~$*.docx
+*.tmp
+
+# NOTE: raw and processed CSV data are intentionally NOT ignored — this is a
+# reproducible analytics repo and the CPCB station-day data is part of the record.
+
+# Derived SQLite warehouse — rebuildable from the CSVs via src/05_load_sqlite.py,
+# so it is not tracked (binary, disposable).
+data/processed/*.db
+data/processed/*.sqlite

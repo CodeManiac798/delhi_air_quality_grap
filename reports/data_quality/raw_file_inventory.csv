@@ -1,0 +1,17 @@
+source_file,station_id,station_name,year,row_count,column_count,first_date,last_date,unparseable_timestamps,duplicate_date_count,missing_calendar_dates,dates_outside_year,schema_signature,file_size_bytes,structural_pass
+"raw_data_data_anand_vihar,_delhi_-_dpcc_1D_22.csv",anand_vihar,Anand Vihar,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,53940,True
+"raw_data_data_anand_vihar,_delhi_-_dpcc_1D.csv",anand_vihar,Anand Vihar,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,101400,True
+"raw_data_data_bawana,_delhi_-_dpcc_1D_22.csv",bawana,Bawana,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,51702,True
+"raw_data_data_bawana,_delhi_-_dpcc_1D.csv",bawana,Bawana,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,103500,True
+"raw_data_data_jawaharlal_nehru_stadium,_delhi_-_dpcc_1D_22.csv",jawaharlal_nehru_stadium,Jawaharlal Nehru Stadium,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,53404,True
+"raw_data_data_jawaharlal_nehru_stadium,_delhi_-_dpcc_1D.csv",jawaharlal_nehru_stadium,Jawaharlal Nehru Stadium,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,108855,True
+"raw_data_data_najafgarh,_delhi_-_dpcc_1D_22.csv",najafgarh,Najafgarh,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,52695,True
+"raw_data_data_najafgarh,_delhi_-_dpcc_1D.csv",najafgarh,Najafgarh,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,114043,True
+"raw_data_data_narela,_delhi_-_dpcc_1D_22.csv",narela,Narela,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,53977,True
+"raw_data_data_narela,_delhi_-_dpcc_1D.csv",narela,Narela,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,114130,True
+"raw_data_data_okhla_phase-2,_delhi_-_dpcc_1D_22.csv",okhla_phase_2,Okhla Phase-2,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,54065,True
+"raw_data_data_okhla_phase-2,_delhi_-_dpcc_1D.csv",okhla_phase_2,Okhla Phase-2,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,113815,True
+"raw_data_data_punjabi_bagh,_delhi_-_dpcc_1D_22.csv",punjabi_bagh,Punjabi Bagh,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,53450,True
+"raw_data_data_punjabi_bagh,_delhi_-_dpcc_1D.csv",punjabi_bagh,Punjabi Bagh,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,111090,True
+"raw_data_data_r_k_puram,_delhi_-_dpcc_1D_22.csv",r_k_puram,R K Puram,2022,365,25,2022-01-01,2022-12-31,0,0,0,0,cf48ea56f549,52335,True
+"raw_data_data_r_k_puram,_delhi_-_dpcc_1D.csv",r_k_puram,R K Puram,2023,365,25,2023-01-01,2023-12-31,0,0,0,0,cf48ea56f549,103500,True
