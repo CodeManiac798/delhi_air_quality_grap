@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Delhi_GRAP_Analytics_Platform"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "431b8163-b79c-43ce-a295-6d307edef0ae"
+  }
+}

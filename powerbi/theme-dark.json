@@ -1,0 +1,39 @@
+{
+  "name": "Delhi GRAP Analytics Platform — Dark",
+  "dataColors": [
+    "#3A7AC0",
+    "#1D9E63",
+    "#B08010",
+    "#00A6B8",
+    "#9D4A9A",
+    "#C93A2E",
+    "#C56D93",
+    "#CB8038"
+  ],
+  "background": "#141A21",
+  "foreground": "#F4F6F8",
+  "tableAccent": "#3A7AC0",
+  "good": "#0ca30c",
+  "neutral": "#fab219",
+  "bad": "#d03b3b",
+  "minimum": "#18324F",
+  "center": "#383835",
+  "maximum": "#C93A2E",
+  "textClasses": {
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#B9C2CB"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 28,
+      "color": "#F4F6F8"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 13,
+      "color": "#F4F6F8"
+    }
+  }
+}

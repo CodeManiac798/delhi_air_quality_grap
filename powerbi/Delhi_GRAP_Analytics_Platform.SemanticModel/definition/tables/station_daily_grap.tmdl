@@ -1,0 +1,161 @@
+table station_daily_grap
+	lineageTag: c3117794-756d-42c8-b1cb-440d1e33594d
+
+	column station_id
+		dataType: string
+		lineageTag: 53abe81b-7afc-445c-9418-62ef8e2beb79
+		summarizeBy: none
+		sourceColumn: station_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column station_name
+		dataType: string
+		lineageTag: a0b4352b-d220-43fd-b2ec-011c49226e91
+		summarizeBy: none
+		sourceColumn: station_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bdc07d13-0426-4369-b326-34748e5e27b3
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 8de3b2a9-3912-49b0-a88c-e80fcb8bcc59
+		summarizeBy: sum
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column pm25_ugm3
+		dataType: double
+		lineageTag: 2fe86498-e296-40e0-839f-7a3368e7f8ce
+		summarizeBy: sum
+		sourceColumn: pm25_ugm3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column pm10_ugm3
+		dataType: double
+		lineageTag: 868e16d7-73cb-45eb-8af5-36457abb6735
+		summarizeBy: sum
+		sourceColumn: pm10_ugm3
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column air_temp_c
+		dataType: double
+		lineageTag: 1edc3b02-f189-4cbe-88de-3eec09d30f04
+		summarizeBy: sum
+		sourceColumn: air_temp_c
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rh_pct
+		dataType: double
+		lineageTag: b3280dc6-0d63-4bed-9355-2fe9e109172b
+		summarizeBy: sum
+		sourceColumn: rh_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wind_speed_ms
+		dataType: double
+		lineageTag: 019ee5ad-a531-4398-ba58-ea5e70843de3
+		summarizeBy: sum
+		sourceColumn: wind_speed_ms
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column wind_dir_deg
+		dataType: double
+		lineageTag: 67de0d51-fca8-4671-a1e3-8102bd1a75cc
+		summarizeBy: sum
+		sourceColumn: wind_dir_deg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column season
+		dataType: string
+		lineageTag: 740e81d6-221a-4597-989d-be9694a740bf
+		summarizeBy: none
+		sourceColumn: season
+
+		annotation SummarizationSetBy = Automatic
+
+	column grap_stage
+		dataType: int64
+		formatString: 0
+		lineageTag: 04bebc0b-c689-46e7-8fb3-eb1fa39fa08e
+		summarizeBy: sum
+		sourceColumn: grap_stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_event_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f6477e4-785b-4bf9-8e39-79b936d1bdc9
+		summarizeBy: sum
+		sourceColumn: is_event_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_change
+		dataType: string
+		lineageTag: 310c304a-8279-40fb-8336-faa774a7cac5
+		summarizeBy: none
+		sourceColumn: days_since_last_change
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_until_next_change
+		dataType: string
+		lineageTag: d6bed002-88e2-4161-8d59-490595c3dc8a
+		summarizeBy: none
+		sourceColumn: days_until_next_change
+
+		annotation SummarizationSetBy = Automatic
+
+	column source_file
+		dataType: string
+		lineageTag: 13fe5bc7-d9e4-44cd-bbbc-3ff9469cf249
+		summarizeBy: none
+		sourceColumn: source_file
+
+		annotation SummarizationSetBy = Automatic
+
+	partition station_daily_grap = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\lenovo\Documents\delhi-aqi-grap\data\processed\station_daily_grap.csv"),[Delimiter=",", Columns=16, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"station_id", type text}, {"station_name", type text}, {"date", type date}, {"year", Int64.Type}, {"pm25_ugm3", type number}, {"pm10_ugm3", type number}, {"air_temp_c", type number}, {"rh_pct", type number}, {"wind_speed_ms", type number}, {"wind_dir_deg", type number}, {"season", type text}, {"grap_stage", Int64.Type}, {"is_event_day", Int64.Type}, {"days_since_last_change", type text}, {"days_until_next_change", type text}, {"source_file", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

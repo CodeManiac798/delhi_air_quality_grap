@@ -1,0 +1,26 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["daily_grap_state","station_daily_grap","stations","grap_events_manual","_Measures"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table daily_grap_state
+ref table DateTableTemplate_40c94796-c01f-4469-b261-548b25aa9852
+ref table LocalDateTable_09be326d-3020-4fa6-9fb5-89fca274cbe3
+ref table station_daily_grap
+ref table stations
+ref table grap_events_manual
+ref table LocalDateTable_f6fcd3b6-db04-48de-8e05-357ce8188aea
+ref table LocalDateTable_e97e6b80-e49a-4dde-a4a3-a675142289c4
+ref table _Measures
+
+ref cultureInfo en-US
+

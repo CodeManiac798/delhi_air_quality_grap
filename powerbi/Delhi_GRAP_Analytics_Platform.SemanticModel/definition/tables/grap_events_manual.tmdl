@@ -1,0 +1,137 @@
+table grap_events_manual
+	lineageTag: b5a83eb5-b713-476c-a60a-8e8e4e82e7f2
+
+	column event_id
+		dataType: string
+		lineageTag: f5b6e7a4-08c0-4662-ace8-cf04a7f9405a
+		summarizeBy: none
+		sourceColumn: event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 9e83fe3e-c084-49cc-83b5-c95f0ba91bb7
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation Variation
+			isDefault
+			relationship: 4adfb024-4eb5-4538-84d9-a3e6cf84c759
+			defaultHierarchy: LocalDateTable_f6fcd3b6-db04-48de-8e05-357ce8188aea.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column effective_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b99febfc-139f-4f0f-b9da-1f8d243e6609
+		summarizeBy: none
+		sourceColumn: effective_date
+
+		variation Variation
+			isDefault
+			relationship: 0abe28f7-4a9f-4d04-9ee2-fd4184d12ea5
+			defaultHierarchy: LocalDateTable_e97e6b80-e49a-4dde-a4a3-a675142289c4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column season
+		dataType: string
+		lineageTag: 3f004727-9622-49d0-872b-5f4bb6156510
+		summarizeBy: none
+		sourceColumn: season
+
+		annotation SummarizationSetBy = Automatic
+
+	column action_type
+		dataType: string
+		lineageTag: f94cbeca-c357-443e-85ee-02608ede22b8
+		summarizeBy: none
+		sourceColumn: action_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage_from
+		dataType: int64
+		formatString: 0
+		lineageTag: 6934460a-1dc4-48c0-a8ef-c73582d6c67a
+		summarizeBy: sum
+		sourceColumn: stage_from
+
+		annotation SummarizationSetBy = Automatic
+
+	column stage_to
+		dataType: int64
+		formatString: 0
+		lineageTag: bd50a139-163d-456d-98e9-8c67cdc16c0f
+		summarizeBy: sum
+		sourceColumn: stage_to
+
+		annotation SummarizationSetBy = Automatic
+
+	column event_direction
+		dataType: string
+		lineageTag: 7c26659a-6d54-4119-976f-53b15d800d93
+		summarizeBy: none
+		sourceColumn: event_direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column immediate_effect
+		dataType: string
+		lineageTag: 86e1b4ba-8df3-426f-87f6-562b9237f57d
+		summarizeBy: none
+		sourceColumn: immediate_effect
+
+		annotation SummarizationSetBy = Automatic
+
+	column official_order_title
+		dataType: string
+		lineageTag: a6973a0b-2f18-43f9-ba57-c2a953c6aba8
+		summarizeBy: none
+		sourceColumn: official_order_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column official_source
+		dataType: string
+		lineageTag: a948cdb2-a28d-4d15-bf60-5b44f17f523e
+		summarizeBy: none
+		sourceColumn: official_source
+
+		annotation SummarizationSetBy = Automatic
+
+	column notes
+		dataType: string
+		lineageTag: cc1ae696-f25b-4581-9d8c-2a1be620381f
+		summarizeBy: none
+		sourceColumn: notes
+
+		annotation SummarizationSetBy = Automatic
+
+	column verified
+		dataType: string
+		lineageTag: 09945761-1821-4301-a1e7-613c17d32ff8
+		summarizeBy: none
+		sourceColumn: verified
+
+		annotation SummarizationSetBy = Automatic
+
+	partition grap_events_manual = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\lenovo\Documents\delhi-aqi-grap\data\raw\grap\grap_events_manual.csv"),[Delimiter=",", Columns=13, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"event_id", type text}, {"order_date", type date}, {"effective_date", type date}, {"season", type text}, {"action_type", type text}, {"stage_from", Int64.Type}, {"stage_to", Int64.Type}, {"event_direction", type text}, {"immediate_effect", type text}, {"official_order_title", type text}, {"official_source", type text}, {"notes", type text}, {"verified", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

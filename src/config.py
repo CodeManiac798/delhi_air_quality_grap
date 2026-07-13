@@ -25,6 +25,8 @@ REPORTS_DQ_DIR = REPO_ROOT / "reports" / "data_quality"
 
 STATION_DAILY_CSV = PROCESSED_DIR / "station_daily.csv"
 STATIONS_CSV = PROCESSED_DIR / "stations.csv"
+DAILY_GRAP_STATE_CSV = PROCESSED_DIR / "daily_grap_state.csv"
+STATION_DAILY_GRAP_CSV = PROCESSED_DIR / "station_daily_grap.csv"
 
 # SQL layer (Phase 2 prep). The SQLite warehouse is a *derived* artifact built
 # from the processed CSVs + the verified GRAP events; it is safe to delete and

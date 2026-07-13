@@ -27,3 +27,13 @@ Thumbs.db
 # so it is not tracked (binary, disposable).
 data/processed/*.db
 data/processed/*.sqlite
+
+# Power BI .pbip project — local/regenerable artifacts only. The TMDL/JSON
+# definition files under .Report/ and .SemanticModel/ are the source of truth
+# and ARE tracked. cache.abf is a compiled model snapshot Desktop rebuilds on
+# open/refresh; a stale one out of sync with edited TMDL is what caused an
+# "empty report" after an external file edit — never worth committing.
+powerbi/*.pbix
+powerbi/**/.pbi/cache.abf*
+powerbi/**/.pbi/localSettings.json
+powerbi/**/*.abf

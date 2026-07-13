@@ -1,0 +1,102 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "d3e914b621a6311a1814",
+  "position": {
+    "x": 856,
+    "y": 64,
+    "z": 4,
+    "height": 120,
+    "width": 192,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Average PM2.5 (guarded)"
+                }
+              },
+              "queryRef": "_Measures.Average PM2.5 (guarded)",
+              "nativeQueryRef": "Average PM2.5 (guarded)"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Coverage Caveat"
+                }
+              },
+              "queryRef": "_Measures.Coverage Caveat",
+              "nativeQueryRef": "Coverage Caveat"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Average PM2.5 (guarded)"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "405ad25e7dda96972b0a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Average PM2.5 (guarded)"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "9a1cf5e2b4d8437eae61",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Measures"
+              }
+            },
+            "Property": "Coverage Caveat"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

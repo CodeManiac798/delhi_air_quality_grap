@@ -1,0 +1,23 @@
+relationship 36f1fed4-aee5-4d3e-a7c1-f08e6a10070e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: daily_grap_state.date
+	toColumn: LocalDateTable_09be326d-3020-4fa6-9fb5-89fca274cbe3.Date
+
+relationship AutoDetected_f8bbb6ad-a21b-4386-bc1a-85b39fcf03f1
+	fromColumn: station_daily_grap.station_id
+	toColumn: stations.station_id
+
+relationship 4adfb024-4eb5-4538-84d9-a3e6cf84c759
+	joinOnDateBehavior: datePartOnly
+	fromColumn: grap_events_manual.order_date
+	toColumn: LocalDateTable_f6fcd3b6-db04-48de-8e05-357ce8188aea.Date
+
+relationship 0abe28f7-4a9f-4d04-9ee2-fd4184d12ea5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: grap_events_manual.effective_date
+	toColumn: LocalDateTable_e97e6b80-e49a-4dde-a4a3-a675142289c4.Date
+
+relationship 895321f2-a1d2-2f82-2407-35117dea72dc
+	fromColumn: station_daily_grap.date
+	toColumn: daily_grap_state.date
+

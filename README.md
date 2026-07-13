@@ -57,37 +57,39 @@ modified** by this pipeline.
 delhi-aqi-grap/
 ├── data/
 │   ├── raw/cpcb/           # 16 untouched CPCB CSVs (+ station list PDF)
-│   ├── raw/grap/           # grap_events_manual.csv (human-entered; not yet populated)
+│   ├── raw/grap/           # grap_events_manual.csv (human-entered; verified events)
 │   ├── raw/weather/        # (future) supplementary weather data
-│   └── processed/          # station_daily.csv, stations.csv
+│   └── processed/          # station_daily.csv, stations.csv, daily_grap_state.csv,
+│       │                   # station_daily_grap.csv, delhi_aqi_grap.db (derived)
 ├── src/
-│   ├── config.py                 # paths, station registry, column maps
-│   ├── 01_inventory_raw_data.py  # raw-file inventory
-│   ├── 02_audit_data_quality.py  # data-quality audit
-│   ├── 03_build_station_daily.py # canonical dataset + metadata
-│   ├── 04_validate_grap_events.py# validate the manual GRAP event calendar
-│   └── 05_load_sqlite.py         # build the SQLite warehouse (derived, disposable)
+│   ├── config.py                      # paths, station registry, column maps
+│   ├── 01_inventory_raw_data.py       # raw-file inventory
+│   ├── 02_audit_data_quality.py       # data-quality audit
+│   ├── 03_build_station_daily.py      # canonical dataset + metadata
+│   ├── 04_validate_grap_events.py     # validate the manual GRAP event calendar
+│   ├── 05_load_sqlite.py              # build the SQLite warehouse (derived, disposable)
+│   ├── 06_build_daily_grap_state.py   # build daily GRAP state table
+│   ├── 07_validate_daily_grap_state.py# validate daily state continuity
+│   ├── 08_merge_station_daily_grap.py # merge station data with GRAP state
+│   └── 09_validate_merged_dataset.py  # validate merged dataset integrity
 ├── tests/                 # pytest checks on the processed dataset + GRAP validator
-├── reports/data_quality/  # generated audit reports
+├── reports/data_quality/  # generated audit reports (data_quality_summary.md,
+│                           # grap_daily_validation.md, merged_dataset_validation.md)
 ├── sql/                   # schema + 15 prepared analytical queries (sql/README.md)
 ├── notebooks/ powerbi/ figures/ docs/
 ├── requirements.txt
 └── README.md
 ```
 
-## How to reproduce (Phase 1)
+## How to reproduce (Phases 1 & 2)
 
 ```bash
 python -m pip install -r requirements.txt
 
-# Phase 2 — inventory the raw files
-python src/01_inventory_raw_data.py
-
-# Phase 3 — data-quality audit (writes reports/data_quality/)
-python src/02_audit_data_quality.py
-
-# Phase 4/5 — build canonical dataset + station metadata
-python src/03_build_station_daily.py
+# Phase 1: Data engineering & validation
+python src/01_inventory_raw_data.py          # inventory raw files
+python src/02_audit_data_quality.py          # data-quality audit (writes reports/)
+python src/03_build_station_daily.py         # build canonical dataset
 
 # Tests
 python -m pytest -q
@@ -95,60 +97,73 @@ python -m pytest -q
 # GRAP event calendar — validate the manual source file
 python src/04_validate_grap_events.py
 
-# Build the SQLite analytical warehouse (derived, disposable; rebuild any time)
+# Phase 2A: Build SQLite warehouse (derived, disposable; rebuild any time)
 python src/05_load_sqlite.py
+
+# Phase 2B: Analytical dataset construction
+python src/06_build_daily_grap_state.py       # daily GRAP state table (730 rows)
+python src/07_validate_daily_grap_state.py    # validate continuity & transitions
+python src/08_merge_station_daily_grap.py     # merge station data + GRAP state (5840 rows)
+python src/09_validate_merged_dataset.py      # validate merged dataset integrity
 ```
+
+The final analytical dataset is `data/processed/station_daily_grap.csv` (5,840 rows, all validations passed).
 
 ## Current status
 
-**Phase 1 (data engineering & validation) complete. Phase 2 preparation
-(SQL layer, warehouse, analysis checklist) complete. Phase 2 analysis not yet
-started — no analytical findings exist yet.**
+**Phase 1 complete. Phase 2 analytical dataset construction complete. Phase 2 EDA not yet started — no analytical findings exist yet.**
 
-- All 16 expected station-year files present; schema consistent; date coverage
-  complete (365/yr); no duplicate dates; no impossible values detected.
-- **Gate 1: PASS** (independently re-validated from the raw files).
-- Canonical `data/processed/station_daily.csv` built: 5,840 station-days
-  (8 stations × 730 days), core 6 variables + date, full provenance.
+### Phase 1 — Data engineering & validation
 
-### GRAP event calendar — first batch acquired, NOT complete
+- All 16 expected station-year files present; schema consistent; date coverage complete (365/yr); no duplicate dates; no impossible values.
+- **Gate 1: PASS** (independently re-validated from raw files).
+- Canonical `data/processed/station_daily.csv` built: 5,840 station-days (8 stations × 730 days), core 6 variables + date, full provenance.
 
-This project's rule is that **every GRAP event must be entered by a human from
-an official CAQM order** — no scraping, no web search, no recall from memory.
+### Phase 2A — GRAP event calendar (human-entered, verified)
 
-- Source file: `data/raw/grap/grap_events_manual.csv` — **5 verified events
-  loaded** (E001–E005, season 2022-23: invoke → Stage I → II → III → IV, then
-  de-escalate to Stage III on 2022-11-06). All `verified = Yes`, 0 contract errors.
-- Schema and rules: `docs/grap_event_data_contract.md` (the data contract).
-- Validator: `python src/04_validate_grap_events.py` checks the file against the
-  contract and reports errors, review flags, and how many rows are analysis-ready.
+This project's rule: **every GRAP event must be entered by a human from an official CAQM order** — no scraping, no web search, no memory.
+
+- Source file: `data/raw/grap/grap_events_manual.csv` — **9 verified events** (E001–E009, season 2022-23).
+  - E001–E005: Oct–Nov 2022 (escalation sequence 0→1→2→3→4→3)
+  - E006–E009: Nov–Dec 2022 (de-escalations and re-escalations; final state = Stage III)
+  - All rows: `verified = Yes`, 0 contract errors.
+- Validator: `python src/04_validate_grap_events.py` — reports 9 analysis-ready events, 0 errors.
 - **Only rows with `verified = Yes` (and no errors) may enter analysis.**
-- **This is a first batch, not a complete calendar** — season 2022-23 has no
-  closing revocation yet, and season 2023-24 has zero events entered. See
-  `docs/issue_tracker.md` (C-1, C-2) before drawing any event-based conclusion.
+- **Known limitation**: No end-of-season revocation yet entered for 2022-23. Stage III remains active through 2023-02-28. Season 2023-24 has zero events (data ends 2023-12-31).
 
-### SQL analytical layer (Phase 2 prep)
+### Phase 2B — Analytical dataset construction (completed)
 
-- `sql/00_schema.sql` — SQLite schema: 3 base tables (`stations`,
-  `station_daily`, `grap_events`) + 4 derived views (`v_calendar`,
-  `daily_grap_state`, `v_station_daily_enriched`, `event_windows`). No
-  redundant storage — see `docs/sql_layer_design.md`.
-- `src/05_load_sqlite.py` — builds `data/processed/delhi_aqi_grap.db` from the
-  validated CSVs; refuses to load if the GRAP file has contract errors.
-- `sql/01`–`15_*.sql` — 15 prepared, documented queries (station summaries,
-  missingness, monthly trends, rankings, stage summaries, event windows,
-  before/after, weather summaries, rolling averages, seasonal comparison, stage
-  transitions, daily state panel, extreme days, coverage matrix). See
-  `sql/README.md`.
+- **Daily GRAP state table** (`data/processed/daily_grap_state.csv`):
+  - 730 rows (2022-01-01 to 2023-12-31), one per calendar date.
+  - Fields: date, grap_stage, season, active_event_id, is_event_day, days_since_last_change, days_until_next_change.
+  - Validation: 6 checks passed (no duplicates, no gaps, correct chronology, event-date correctness, stage continuity).
+  
+- **Merged analytical dataset** (`data/processed/station_daily_grap.csv`):
+  - 5,840 rows (8 stations × 730 days), grain = station × date.
+  - Joins: station_daily + daily_grap_state.
+  - Fields: all 10 measurement variables + season + 5 GRAP state fields.
+  - Validation: 8 checks passed (expected row count, 8 stations, no duplicates, no merge failures, complete date coverage, correct GRAP stage assignment).
+  - **Ready for EDA**: dataset is structurally sound, fully validated.
+
+### Phase 2C — SQL analytical layer
+
+- `sql/00_schema.sql` — SQLite schema: 3 base tables (`stations`, `station_daily`, `grap_events`) + 4 derived views (`v_calendar`, `daily_grap_state`, `v_station_daily_enriched`, `event_windows`). No redundant storage — see `docs/sql_layer_design.md`.
+- `src/05_load_sqlite.py` — builds `data/processed/delhi_aqi_grap.db` from validated CSVs; refuses to load if GRAP file has errors. Rebuild with: `python src/05_load_sqlite.py`.
+- `sql/01`–`15_*.sql` — 15 prepared, documented analytical queries. See `sql/README.md`.
 - Power BI data model designed (not yet built): `docs/powerbi_data_model.md`.
 
-### What's next
+### What's next — Phase 2 Analysis
 
-`docs/phase2_analysis_checklist.md` has the exact, ordered task list for Phase 2
-(EDA → SQL pass → event windows → weather adjustment → summary stats → Power BI
-→ documentation). `docs/issue_tracker.md` and `docs/project_status_report.md`
-track open issues, assumptions, limitations, and overall project status.
+**EDA has not yet started. No analytical findings, comparisons, or conclusions have been drawn.**
 
-See `docs/data_dictionary.md` for processed-field definitions,
-`docs/grap_event_data_contract.md` for the GRAP event contract, and
-`reports/data_quality/data_quality_summary.md` for the audit summary.
+- Rebuild SQLite warehouse with new GRAP events: `python src/05_load_sqlite.py` (now loads 9 events instead of 5).
+- Reference: `docs/phase2_analysis_checklist.md` for ordered task list.
+- Open issues tracked in `docs/issue_tracker.md` and `docs/project_status_report.md`.
+
+### Data documentation
+
+- `docs/data_dictionary.md` — processed dataset field definitions
+- `docs/grap_event_data_contract.md` — GRAP event schema & validation rules
+- `reports/data_quality/data_quality_summary.md` — Phase 1 audit summary
+- `reports/data_quality/grap_daily_validation.md` — daily state table validation
+- `reports/data_quality/merged_dataset_validation.md` — merged dataset validation

@@ -1,0 +1,81 @@
+table daily_grap_state
+	lineageTag: b9165511-9f2e-4fcd-bb61-ee6b91dbab1d
+
+	column date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 01d1d49e-0f75-4acc-87fb-1b632cf24431
+		summarizeBy: none
+		sourceColumn: date
+
+		variation Variation
+			isDefault
+			relationship: 36f1fed4-aee5-4d3e-a7c1-f08e6a10070e
+			defaultHierarchy: LocalDateTable_09be326d-3020-4fa6-9fb5-89fca274cbe3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column grap_stage
+		dataType: int64
+		formatString: 0
+		lineageTag: 97531240-fbe8-4cb3-afcd-52186436c035
+		summarizeBy: sum
+		sourceColumn: grap_stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column season
+		dataType: string
+		lineageTag: 52f646e7-ed91-4b05-bc70-cd5677eccdc0
+		summarizeBy: none
+		sourceColumn: season
+
+		annotation SummarizationSetBy = Automatic
+
+	column active_event_id
+		dataType: string
+		lineageTag: 7e3930ba-08dd-42bb-a993-6134d63e4f21
+		summarizeBy: none
+		sourceColumn: active_event_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_event_day
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e5d4ccc-c88f-4239-b65c-cc8754f86944
+		summarizeBy: sum
+		sourceColumn: is_event_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_last_change
+		dataType: string
+		lineageTag: d0c87ba0-94c8-4ac3-8217-c52f8c6d42f1
+		summarizeBy: none
+		sourceColumn: days_since_last_change
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_until_next_change
+		dataType: string
+		lineageTag: 67d90b33-10a4-45da-a0b8-1f13c98ab4b9
+		summarizeBy: none
+		sourceColumn: days_until_next_change
+
+		annotation SummarizationSetBy = Automatic
+
+	partition daily_grap_state = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\lenovo\Documents\delhi-aqi-grap\data\processed\daily_grap_state.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date", type date}, {"grap_stage", Int64.Type}, {"season", type text}, {"active_event_id", type text}, {"is_event_day", Int64.Type}, {"days_since_last_change", type text}, {"days_until_next_change", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

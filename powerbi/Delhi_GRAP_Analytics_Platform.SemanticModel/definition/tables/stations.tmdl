@@ -1,0 +1,88 @@
+table stations
+	lineageTag: 8139a3e4-48f1-4fc3-9eda-8c92d4448cd0
+
+	column station_id
+		dataType: string
+		lineageTag: 18796c63-a05f-4adf-9256-126218fee028
+		summarizeBy: none
+		sourceColumn: station_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column station_name
+		dataType: string
+		lineageTag: 07692869-32e4-4ec6-9612-ee815247a9c5
+		summarizeBy: none
+		sourceColumn: station_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_name
+		dataType: string
+		lineageTag: faab1b38-da36-4d9d-aded-4cc292900b8e
+		summarizeBy: none
+		sourceColumn: display_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column operating_agency
+		dataType: string
+		lineageTag: 75fb8360-5cf2-4607-9487-818fb9fe7c31
+		summarizeBy: none
+		sourceColumn: operating_agency
+
+		annotation SummarizationSetBy = Automatic
+
+	column geographic_role
+		dataType: string
+		lineageTag: 2d8cfc4c-1530-4316-a681-9fd2c3db6e76
+		summarizeBy: none
+		sourceColumn: geographic_role
+
+		annotation SummarizationSetBy = Automatic
+
+	column selected
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 29f9506c-e7ac-4881-acd1-b2fe5f06d172
+		summarizeBy: none
+		sourceColumn: selected
+
+		annotation SummarizationSetBy = Automatic
+
+	column selection_reason
+		dataType: string
+		lineageTag: c25d0b2a-2926-4d60-959e-6f433d9e8f99
+		summarizeBy: none
+		sourceColumn: selection_reason
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: string
+		lineageTag: 68c4398b-25dc-4f28-b438-e124b8c16afe
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+	column longitude
+		dataType: string
+		lineageTag: 8b345f68-3972-46a7-b5f8-943b8734200c
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+	partition stations = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\lenovo\Documents\delhi-aqi-grap\data\processed\stations.csv"),[Delimiter=",", Columns=9, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"station_id", type text}, {"station_name", type text}, {"display_name", type text}, {"operating_agency", type text}, {"geographic_role", type text}, {"selected", type logical}, {"selection_reason", type text}, {"latitude", type text}, {"longitude", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
