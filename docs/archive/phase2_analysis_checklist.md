@@ -1,3 +1,8 @@
+> **Archived.** A forward-looking task checklist written before Phase 2 began.
+> Every item below has since been completed — see the
+> [notebooks](../../notebooks/) and [root README](../../README.md) for the
+> finished work. Kept for planning-process history only.
+
 # Phase 2 Analysis Checklist
 
 The exact order to work tomorrow. Each task lists **Purpose · Input · Output ·

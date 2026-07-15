@@ -8,14 +8,14 @@ environmental researchers, and urban planning teams. **It contains no report
 pages, no visuals, no layout, and no colour decisions.** Those are a separate,
 later deliverable.
 
-**Relationship to prior documents.** `docs/powerbi_data_model.md` was written
+**Relationship to prior documents.** `docs/archive/powerbi_data_model.md` was written
 earlier in the project (Phase 2) against a smaller event calendar and a
 nullable, view-computed `active_stage` column. The pipeline has since moved on:
 `grap_stage` is now populated for every calendar day (0 = no active GRAP, never
 NULL), the event calendar carries **9** verified events across **three**
 GRAP-season labels, and a fixed **±7-day** event-window table is now
 materialized on disk rather than computed at query time. This document
-supersedes `docs/powerbi_data_model.md` for semantic-model purposes; the
+supersedes `docs/archive/powerbi_data_model.md` for semantic-model purposes; the
 earlier file is kept for historical context on the SQL-view design.
 
 **Analytical phase status.** Frozen. Every number this model will ever surface
@@ -459,7 +459,7 @@ KPI card rather than alongside its own coverage figure.
 `grap_season → year → month_name → date`. Because a GRAP season spans two
 calendar years (Oct–Feb), do **not** nest `grap_season` under `year` — keep it
 as a separate top-level slicer/hierarchy branch, exactly as
-`docs/powerbi_data_model.md` already noted. **Turn off Power BI's automatic
+`docs/archive/powerbi_data_model.md` already noted. **Turn off Power BI's automatic
 Date/Time hierarchy** (see Section 9) so this explicit hierarchy is the only
 one users see.
 
@@ -553,7 +553,7 @@ purpose at all (smaller model, nothing to accidentally re-expose later).
 - **Two fact tables, two grains, never merged.** `FactStationDaily` and
   `FactEventWindow` answer different questions (city-wide daily trend vs.
   event-relative comparison) and are kept as separate tables rather than
-  forced into one, echoing the same separation `docs/powerbi_data_model.md`
+  forced into one, echoing the same separation `docs/archive/powerbi_data_model.md`
   established and that `06_event_window_construction.ipynb` /
   `08_cross_event_analysis.ipynb` rely on structurally.
 

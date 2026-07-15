@@ -1,3 +1,9 @@
+> **Archived.** This is a raw development log from the project's early planning
+> sessions (data-source scouting, station selection). It predates the completed
+> pipeline and analysis and is kept for engineering-process history only. For
+> current, accurate project information see the [root README](../../README.md)
+> and [`docs/analysis_plan.md`](../analysis_plan.md).
+
 # Project Log
 
 ## 2026-07-10

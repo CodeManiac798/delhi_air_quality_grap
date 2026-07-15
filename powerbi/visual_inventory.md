@@ -74,44 +74,41 @@ this document only transcribes what already has a design decision behind it.
 
 ---
 
-## Page 2 — Air Quality Explorer *(approved at high-level only — see `docs/dashboard_design_system.md` §3)*
+## Page 2 — Air Quality Analysis *(built — planned as "Air Quality Explorer" in `docs/dashboard_design_system.md` §3)*
 
-Not yet given an implementation spec. Approved visual list, pending detailed
-placement/formatting: 1 KPI card row (5 cards: Average PM2.5, Average PM10,
-Average Temperature, Average Humidity, Average Wind Speed) · 2 stacked
-single-axis trend lines (PM2.5, PM10) · 1 station box plot · 3 weather line
-charts (temperature, humidity, wind speed — small multiples, never
-dual-axis) · 1 monthly PM2.5 box plot. Write
-`docs/page2_air_quality_explorer.md` before building this page, following the
-same format as `docs/page1_executive_overview.md`.
+Built directly in Power BI Desktop rather than from a written implementation
+spec (the approach `docs/page1_executive_overview.md` used for Page 1). As
+shipped: a pollution trend line chart, three slicers (station/season filters),
+and three text panels, under the display name "Air Quality Analysis." The
+original approved visual list (station box plot, weather small multiples,
+monthly variability box plot) describes the design intent; the built page is a
+streamlined version of it, not a literal match — this file has not been
+updated to a full visual-by-visual inventory for the as-built page.
 
-## Page 3 — GRAP Event Explorer *(flagship — approved at high-level only)*
+## Page 3 — GRAP Intervention Analysis *(built — planned as "GRAP Event Explorer," the flagship page)*
 
-Not yet given an implementation spec. Approved visual list: 1 event selector
-(9 rows) · 1 KPI row (5 cards) · 1 relative-day PM2.5 profile line · 1
-Pre/Event/Post diverging paired bar (uses the `minimum`/`center`/`maximum`
-diverging tokens defined in `theme.json`) · 1 emphasis-style cross-event
-overlay (selected event in accent, other 8 muted gray) · 1 stage-transition
-detail card. Write `docs/page3_grap_event_explorer.md` before building.
+Built directly in Power BI Desktop. As shipped: an event-relative pollution
+trend line chart with three slicers, under the display name "GRAP Intervention
+Analysis." As with Page 2, this is a streamlined build against the approved
+design intent rather than a page matching the original visual list
+line-for-line.
 
-## Page 4 — Research Findings *(approved at high-level only)*
+## Page 4 — Weather Context Analysis *(built — a different page than the "Research Findings" originally planned for this slot)*
 
-Not yet given an implementation spec. Approved visual list: 4 themed
-text/callout cards (pollution patterns / weather context / cross-event
-consistency / sensitivity to window width), each with at most one small
-supporting static chart. No filters, no cross-filtering (design system §3
-rationale: a citable, stable page). Write
-`docs/page4_research_findings.md` before building.
+The dashboard as built substitutes a dedicated **Weather Context Analysis**
+page (three weather line charts, three slicers, three text panels) in place
+of the "Research Findings" page sketched in `docs/dashboard_design_system.md`
+§3 — a legitimate build-time decision to give weather its own page rather than
+a separate findings page. `docs/dashboard_design_system.md` has not been
+updated to reflect this substitution.
 
-## Page 5 — Methodology & Trust *(approved at high-level only)*
+## Page 5 — Methodology & About *(built — planned as "Methodology & Trust")*
 
-Not yet given an implementation spec. Approved visual list: 1 static pipeline
-diagram · 1 completeness heatmap (station × month, sequential navy ramp —
-see `powerbi/README_powerbi.md` §4 for the navy sequential steps) · 2 side-by-side claim lists
-(allowed / unsupported, from `docs/analysis_plan.md` §9–10) · 1 limitations
-text block · 1 glossary/definitions table. This is also the full-length
-destination for the About panel's "Read full methodology →" link. Write
-`docs/page5_methodology_trust.md` before building.
+Built directly in Power BI Desktop as a text-only page (6 text boxes, no
+filters), under the display name "Methodology & About." Matches the design
+intent of a static, citable page; the specific sub-sections (pipeline diagram,
+completeness heatmap, claim lists, glossary) were not verified visual-by-visual
+against this inventory.
 
 ---
 

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "0a764061bcc563ae2cc4",
+  "position": {
+    "x": 0,
+    "y": 555.71320308312227,
+    "z": 7001,
+    "height": 163.53413060756731,
+    "width": 652.62231751723618,
+    "tabOrder": 7001
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Temperature, humidity, and wind speed are presented as contextual environmental variables alongside air quality observations.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "These variables provide additional background for interpreting pollution patterns but should not be interpreted as causal drivers of GRAP interventions.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "This dashboard summarizes descriptive observations only and does not perform statistical or causal inference.",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#000000"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

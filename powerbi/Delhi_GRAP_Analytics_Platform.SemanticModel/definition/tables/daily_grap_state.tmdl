@@ -21,10 +21,10 @@ table daily_grap_state
 		dataType: int64
 		formatString: 0
 		lineageTag: 97531240-fbe8-4cb3-afcd-52186436c035
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: grap_stage
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column season
 		dataType: string

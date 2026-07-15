@@ -1,3 +1,10 @@
+> **Archived.** Snapshot from the start of Phase 2 (2026-07-11), when only 5
+> GRAP events were loaded and analysis had not yet begun. The event calendar
+> now holds 9 verified events and the full analysis, event-window study, and
+> dashboard described in the [root README](../../README.md) are complete. Kept
+> for process history; current limitations live in
+> [`docs/analysis_plan.md`](../analysis_plan.md#11-limitations).
+
 # Issue Tracker
 
 Professional issue log for the Delhi AQI / GRAP repository, as of **2026-07-11**

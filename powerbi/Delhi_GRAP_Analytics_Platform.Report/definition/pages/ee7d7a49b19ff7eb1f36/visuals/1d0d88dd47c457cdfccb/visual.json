@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "1d0d88dd47c457cdfccb",
+  "position": {
+    "x": 652.62231751723618,
+    "y": 419.43476091014952,
+    "z": 7000,
+    "height": 299.81257278054011,
+    "width": 626.88083399567472,
+    "tabOrder": 7000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "station_daily_grap"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "station_daily_grap.date",
+              "nativeQueryRef": "date",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "station_daily_grap"
+                        }
+                      },
+                      "Property": "wind_speed_ms"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(station_daily_grap.wind_speed_ms)",
+              "nativeQueryRef": "Average of wind_speed_ms"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "station_daily_grap"
+                  }
+                },
+                "Property": "date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Average Wind Speed'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

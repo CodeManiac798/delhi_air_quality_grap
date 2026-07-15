@@ -1,3 +1,8 @@
+> **Archived.** Snapshot from the end of Phase 2 preparation (2026-07-11),
+> reporting ~35% completion with analysis, weather context, and the dashboard
+> not yet started. All of that work is now complete — see the
+> [root README](../../README.md) for current project status.
+
 # Project Status Report
 
 As of **2026-07-11**, end of Phase 2 preparation. This report is a status

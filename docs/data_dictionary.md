@@ -1,8 +1,8 @@
 # Data Dictionary
 
-Documents the fields in the processed Phase 1 datasets. Units marked
-**(verify)** are inferred from raw CPCB column headers and should be confirmed
-against the official CPCB metadata before analytical use.
+Documents the fields in every processed dataset under `data/processed/`. Units
+marked **(verify)** are inferred from raw CPCB column headers and should be
+confirmed against the official CPCB metadata before analytical use.
 
 ## `data/processed/station_daily.csv`
 
@@ -46,6 +46,55 @@ One row per selected station.
 | `selection_reason` | Why the station was selected | — | project | derived | |
 | `latitude` | Station latitude | deg | — | — | **blank — not yet verified** |
 | `longitude` | Station longitude | deg | — | — | **blank — not yet verified** |
+
+## `data/processed/daily_grap_state.csv`
+
+Grain: **one calendar day**. 730 rows, 2022-01-01 to 2023-12-31. Built by
+`src/06_build_daily_grap_state.py` from the verified GRAP event calendar — the
+single source of truth for "what GRAP stage was active on day D."
+
+| field | meaning | unit | source | raw/derived | missingness treatment |
+|---|---|---|---|---|---|
+| `date` | Calendar date (ISO `YYYY-MM-DD`) | date | derived | derived | never null |
+| `grap_stage` | Active GRAP stage on this date (0 = no active GRAP) | integer 0–4 | derived from `grap_events_manual.csv` | derived | never null (0 by default) |
+| `season` | GRAP season the date falls in (e.g. `2022-23`), blank off-season | — | derived | derived | blank by design outside a GRAP season |
+| `active_event_id` | ID of the event currently in force, if any | — | derived | derived | blank on non-transition days |
+| `is_event_day` | 1 if this date is a verified event's effective date | 0/1 | derived | derived | never null |
+| `days_since_last_change` | Days since the most recent stage change | integer | derived | derived | blank before a season's first event |
+| `days_until_next_change` | Days until the next recorded stage change | integer | derived | derived | blank after a season's last recorded event |
+
+## `data/processed/station_daily_grap.csv`
+
+Grain: **one monitoring station × one calendar day**. 5,840 rows (8 stations ×
+730 days) — the primary analytical dataset used by every notebook. Built by
+`src/08_merge_station_daily_grap.py` as `station_daily.csv` joined with
+`daily_grap_state.csv` on `date`.
+
+| field | meaning | unit | source | raw/derived |
+|---|---|---|---|---|
+| `station_id`, `station_name`, `year`, `date` | Same as `station_daily.csv` | — | `station_daily.csv` | carried through |
+| `pm25_ugm3`, `pm10_ugm3`, `air_temp_c`, `rh_pct`, `wind_speed_ms`, `wind_dir_deg` | Same as `station_daily.csv` | see above | `station_daily.csv` | carried through |
+| `source_file` | Originating raw CSV filename | — | `station_daily.csv` | carried through |
+| `season`, `grap_stage`, `is_event_day`, `days_since_last_change`, `days_until_next_change` | Same as `daily_grap_state.csv`, joined onto every station row for that date | see above | `daily_grap_state.csv` | joined |
+
+## `data/processed/event_windows_master.csv`
+
+Grain: **one verified event × one station × one relative day**. 1,080 rows
+(9 events × 8 stations × 15 relative days). Built by
+`notebooks/06_event_window_construction.ipynb` as a fixed ±7-day window around
+each verified event's effective date — the input to every event-window
+notebook (`07`–`10`).
+
+| field | meaning | unit | notes |
+|---|---|---|---|
+| `event_id` | Verified event identifier (`E001`–`E009`) | — | matches `grap_events_manual.csv` |
+| `event_date` | The event's effective date | date | constant within an event |
+| `relative_day` | Signed offset from the event date | integer, −7…+7 | 0 = the event day itself |
+| `calendar_date` | `event_date + relative_day` | date | |
+| `station_name` | Monitoring station | — | matches `stations.csv` |
+| `pm25_ugm3`, `pm10_ugm3`, `air_temp_c`, `rh_pct`, `wind_speed_ms`, `wind_dir_deg` | Same as `station_daily.csv`, for `(station_name, calendar_date)` | see above | left blank where the source row is missing — no imputation |
+| `grap_stage` | Active GRAP stage on `calendar_date` | integer 0–4 | |
+| `is_before_event`, `is_event_day`, `is_after_event` | Period flags derived from `relative_day` | boolean | exactly one is `True` per row |
 
 ## Reports (audit outputs, not analytical data)
 

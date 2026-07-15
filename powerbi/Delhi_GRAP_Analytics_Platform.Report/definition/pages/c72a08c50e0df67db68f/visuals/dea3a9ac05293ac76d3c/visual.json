@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "dea3a9ac05293ac76d3c",
   "position": {
-    "x": 1064,
-    "y": 64,
-    "z": 5,
-    "height": 120,
-    "width": 192,
-    "tabOrder": 5
+    "x": 1077.86747513101,
+    "y": 96.155084112406641,
+    "z": 5000,
+    "height": 122.52018782064717,
+    "width": 190.75927977138736,
+    "tabOrder": 5000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -51,24 +51,42 @@
         "isDefaultSort": true
       }
     },
-    "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "1455a111b227d86ea722",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
+    "objects": {
+      "layout": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
               }
-            },
-            "Property": "Data Completeness %"
+            }
           }
-        },
-        "type": "Advanced"
-      }
-    ]
+        }
+      ],
+      "outline": [
+        {
+          "properties": {
+            "lineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
   }
 }

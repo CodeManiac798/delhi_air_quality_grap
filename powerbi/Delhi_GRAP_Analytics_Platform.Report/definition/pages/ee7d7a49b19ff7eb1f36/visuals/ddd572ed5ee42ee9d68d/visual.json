@@ -1,0 +1,95 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "ddd572ed5ee42ee9d68d",
+  "position": {
+    "x": 669.27857156059963,
+    "y": 119.62218812960943,
+    "z": 6000,
+    "height": 272.55688434594555,
+    "width": 610.22457995231139,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "station_daily_grap"
+                    }
+                  },
+                  "Property": "date"
+                }
+              },
+              "queryRef": "station_daily_grap.date",
+              "nativeQueryRef": "date",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "station_daily_grap"
+                        }
+                      },
+                      "Property": "rh_pct"
+                    }
+                  },
+                  "Function": 1
+                }
+              },
+              "queryRef": "Sum(station_daily_grap.rh_pct)",
+              "nativeQueryRef": "Average of rh_pct"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "station_daily_grap"
+                  }
+                },
+                "Property": "date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Average Relative Humidity'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

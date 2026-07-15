@@ -16,7 +16,7 @@ table _Measures
 		lineageTag: d824a190-36c5-4d8c-a836-c8c5e5d61c9a
 
 	measure 'Date Coverage' =
-
+			
 			FORMAT(MIN(daily_grap_state[date]), "MMM yyyy")
 			&
 			" – "
@@ -25,7 +25,7 @@ table _Measures
 		lineageTag: 52763480-0757-42ef-ac1a-9aac1d702b45
 
 	measure 'Average PM2.5' =
-
+			
 			AVERAGE(station_daily_grap[pm25_ugm3])
 		formatString: 0.0
 		lineageTag: 3354569a-3950-4376-b510-7023552f151b
@@ -33,7 +33,7 @@ table _Measures
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Average PM2.5 (guarded)' =
-
+			
 			IF (
 			    [Data Completeness %] >= 0.5,
 			    [Average PM2.5],
@@ -43,7 +43,7 @@ table _Measures
 		lineageTag: 8c1a4f2e-9d3b-4a6c-b5e7-2f8a9c4d1e6b
 
 	measure 'Data Completeness %' =
-
+			
 			DIVIDE(
 			    COUNT(station_daily_grap[pm25_ugm3]),
 			    COUNTROWS(station_daily_grap)
@@ -52,7 +52,7 @@ table _Measures
 		lineageTag: 50d383c8-cb4d-4ce8-acf6-75ac4bf4bbce
 
 	measure 'Coverage Caveat' =
-
+			
 			IF (
 			    [Data Completeness %] < 0.8,
 			    "Coverage " & FORMAT ( [Data Completeness %], "0%" ) & " for this selection",
@@ -61,8 +61,8 @@ table _Measures
 		lineageTag: 6f2b8e91-4c7d-4a3f-9e1b-8d5c6a7f3e2c
 
 	column MeasuresPlaceholder
-		isHidden
 		dataType: int64
+		isHidden
 		formatString: 0
 		lineageTag: 0c962ed5-625b-4d3c-b7ac-41a655845539
 		summarizeBy: none
@@ -79,3 +79,4 @@ table _Measures
 				    Source
 
 	annotation PBI_ResultType = Table
+

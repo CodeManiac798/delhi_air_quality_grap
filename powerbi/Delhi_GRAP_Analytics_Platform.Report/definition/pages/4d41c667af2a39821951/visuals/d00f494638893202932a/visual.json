@@ -1,0 +1,48 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "d00f494638893202932a",
+  "position": {
+    "x": 855.52577586366237,
+    "y": 592.054120995915,
+    "z": 5,
+    "height": 127.19321269477457,
+    "width": 411.86373634498437,
+    "tabOrder": 5
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Disclaimer",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "This dashboard presents descriptive analytical findings for educational and decision-support purposes. The visualizations summarize historical observations and should not be interpreted as establishing causal relationships between GRAP interventions and changes in air quality.",
+                    "textStyle": {
+                      "fontSize": "10.5pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

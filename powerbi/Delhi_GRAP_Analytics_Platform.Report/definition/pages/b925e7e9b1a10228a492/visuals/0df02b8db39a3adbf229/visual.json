@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "0df02b8db39a3adbf229",
+  "position": {
+    "x": 439.11942477957888,
+    "y": 62.08240143435426,
+    "z": 1000,
+    "height": 43.911942477957894,
+    "width": 840.38372673333208,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Exploratory analysis of PM2.5, PM10 and station-level air quality trends (2022–2023)",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

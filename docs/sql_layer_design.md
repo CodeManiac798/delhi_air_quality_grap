@@ -101,7 +101,7 @@ event queries flag this.
 | Window functions | `RANK` (04), `LEAD` (12), windowed `AVG/COUNT` (10). |
 | Event studies | `event_windows` view + queries 06 (day-relative) and 08 (before/after). |
 | Station comparisons | `v_station_daily_enriched` groups by station × stage (07) / season (11). |
-| Power BI | `v_station_daily_enriched` as the fact; `stations`, `v_calendar`, `daily_grap_state`, `grap_events` as dimensions. See `docs/powerbi_data_model.md`. |
+| Power BI | `v_station_daily_enriched` as the fact; `stations`, `v_calendar`, `daily_grap_state`, `grap_events` as dimensions. The dashboard actually built (`powerbi/`) sources from the processed CSVs directly rather than this SQL layer — see `docs/powerbi_architecture.md`. |
 | No redundancy | Only 3 base tables; all state/windows are views. |
 
 ## Deliberate non-goals (SQLite limitations, handled elsewhere)

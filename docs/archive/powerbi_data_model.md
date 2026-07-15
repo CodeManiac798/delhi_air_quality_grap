@@ -1,3 +1,8 @@
+> **Archived — superseded.** This was the original semantic-model sketch,
+> written before the dashboard was built. It has been superseded by
+> [`docs/powerbi_architecture.md`](../powerbi_architecture.md), which reflects
+> the model actually implemented in `powerbi/`. Kept for design-process history.
+
 # Power BI Data Model (Phase D)
 
 The **data model** for the Delhi AQI / GRAP Power BI file — fact/dimension

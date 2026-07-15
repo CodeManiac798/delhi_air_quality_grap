@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
   "name": "05b530c89c72848292fd",
   "position": {
-    "x": 232,
-    "y": 64,
-    "z": 1,
-    "height": 120,
-    "width": 192,
-    "tabOrder": 1
+    "x": 198.51372203851693,
+    "y": 96.155084112406641,
+    "z": 1000,
+    "height": 122.52018782064717,
+    "width": 210.92082966592423,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -51,24 +51,62 @@
         "isDefaultSort": true
       }
     },
-    "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "cb6cedb5a8594287c2b5",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
+    "objects": {
+      "layout": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
               }
-            },
-            "Property": "Total Observations"
+            }
           }
-        },
-        "type": "Advanced"
-      }
-    ]
+        }
+      ],
+      "outline": [
+        {
+          "properties": {
+            "lineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
   }
 }
