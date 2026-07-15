@@ -50,10 +50,6 @@ dashboard.
 |---|
 | ![Methodology & About](powerbi/screenshots/page5_methodology_about.png) |
 
-*(Screenshots pending export from Power BI Desktop — see
-[`powerbi/screenshots/README.md`](powerbi/screenshots/README.md) for the exact
-filenames expected here.)*
-
 ## Motivation
 
 Delhi's winter air quality is among the most severe of any major city in the
